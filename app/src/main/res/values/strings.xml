@@ -1,0 +1,22 @@
+<resources>
+    <string name="app_name">MACROBT</string>
+    <string name="retroceso_fino">Retroceso Fino</string>
+    <string name="avance_fino">Avance Fino</string>
+    <string name="retroceso">Retroceso</string>
+    <string name="avance">Avance</string>
+    <string name="posicion_inicial">Posición Inicial</string>
+    <string name="posicion_final">Posición Final</string>
+    <string name="configuracion">Configuración</string>
+    <string name="distancia">Distancia</string>
+    <string name="pasos">Pasos</string>
+    <string name="tiempo_restante">Tiempo Restante</string>
+    <string name="ejecutar">Ejecutar</string>
+    <string name="parar">Parar</string>
+    <string name="hacer_foto">Hacer Foto</string>
+    <string name="mostrar_distancia">: %1$.2f mm</string>
+    <string name="mostrar_pasos">: %1$d</string>
+    <string name="mostrar_tiempo">: %1$d s</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+</resources>
