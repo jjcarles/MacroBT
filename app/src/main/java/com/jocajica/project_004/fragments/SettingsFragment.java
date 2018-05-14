@@ -42,7 +42,7 @@ public class SettingsFragment extends Fragment implements View.OnClickListener {
     public void onAttach(Context context) {
         super.onAttach(context);
 
-        mPrefs = context.getSharedPreferences("MACROBTPREFS",Context.MODE_PRIVATE);
+        mPrefs = context.getSharedPreferences("MACROBTPREFS", Context.MODE_PRIVATE);
 
         try {
             mCallback = (OnSettingsListener) context;
@@ -73,9 +73,9 @@ public class SettingsFragment extends Fragment implements View.OnClickListener {
 
     private void loadSavedPreferences() {
         String strDelayBetweenPhotos = mPrefs.getInt("DELAYBETWEENPHOTOS", 1) + "";
-        String strExpositionTime = mPrefs.getFloat("EXPOSITIONTIME", (float)1.6) + "";
+        String strExpositionTime = mPrefs.getFloat("EXPOSITIONTIME", (float) 1.6) + "";
         String strSpeed = mPrefs.getInt("SPEED", 10) + "";
-        String strStepDistance = mPrefs.getFloat("STEPDISTANCE", (float)0.4) + "";
+        String strStepDistance = mPrefs.getFloat("STEPDISTANCE", (float) 0.4) + "";
         String strStepsBetweenPhotos = mPrefs.getInt("STEPSBETWEENPHOTOS", 1) + "";
         String strStepsRevolution = mPrefs.getInt("STEPSREVOLUTION", 200) + "";
 
@@ -89,9 +89,9 @@ public class SettingsFragment extends Fragment implements View.OnClickListener {
 
     private void saveCurrentValues() {
         int nDelayBetweenPhotos = Integer.valueOf(mEditTextDelayBetweenPhotos.getText().toString());
-        float nExpositionTime = Float.valueOf(String.format("%1$.2f", mEditTextExpositionTime.getText().toString()));
+        float nExpositionTime = Float.valueOf(mEditTextExpositionTime.getText().toString());
         int nSpeed = Integer.valueOf(mEditTextSpeed.getText().toString());
-        float nStepDistance = Float.valueOf(String.format("$1%.2f", mEditTextStepDistance.getText().toString()));
+        float nStepDistance = Float.valueOf(mEditTextStepDistance.getText().toString());
         int nStepsBetweenPhotos = Integer.valueOf(mEditTextStepsBetweenPhotos.getText().toString());
         int nStepsRevolution = Integer.valueOf(mEditTextStepsRevolution.getText().toString());
 
