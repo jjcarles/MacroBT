@@ -31,7 +31,6 @@ public class SettingsFragment extends Fragment implements View.OnClickListener {
     private EditText mEditTextStepsBetweenPhotos;
 
     SharedPreferences mPrefs;
-    SharedPreferences.Editor mEditorPrefs;
 
     private OnSettingsListener mCallback;
 
@@ -95,14 +94,14 @@ public class SettingsFragment extends Fragment implements View.OnClickListener {
         int nStepsBetweenPhotos = Integer.valueOf(mEditTextStepsBetweenPhotos.getText().toString());
         int nStepsRevolution = Integer.valueOf(mEditTextStepsRevolution.getText().toString());
 
-        mEditorPrefs = mPrefs.edit();
-        mEditorPrefs.putInt("DELAYBETWEENPHOTOS", nDelayBetweenPhotos);
-        mEditorPrefs.putFloat("EXPOSITIONTIME", nExpositionTime);
-        mEditorPrefs.putInt("SPEED", nSpeed);
-        mEditorPrefs.putFloat("STEPDISTANCE", nStepDistance);
-        mEditorPrefs.putInt("STEPSBETWEENPHOTOS", nStepsBetweenPhotos);
-        mEditorPrefs.putInt("STEPSREVOLUTION", nStepsRevolution);
-        mEditorPrefs.commit();
+        SharedPreferences.Editor editorPrefs = mPrefs.edit();
+        editorPrefs.putInt("DELAYBETWEENPHOTOS", nDelayBetweenPhotos);
+        editorPrefs.putFloat("EXPOSITIONTIME", nExpositionTime);
+        editorPrefs.putInt("SPEED", nSpeed);
+        editorPrefs.putFloat("STEPDISTANCE", nStepDistance);
+        editorPrefs.putInt("STEPSBETWEENPHOTOS", nStepsBetweenPhotos);
+        editorPrefs.putInt("STEPSREVOLUTION", nStepsRevolution);
+        editorPrefs.commit();
     }
 
     private void initUI(View v) {

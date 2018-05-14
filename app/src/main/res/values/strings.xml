@@ -15,7 +15,7 @@
     <string name="hacer_foto">Hacer Foto</string>
     <string name="mostrar_distancia">: %1$.2f mm</string>
     <string name="mostrar_pasos">: %1$d</string>
-    <string name="mostrar_tiempo">: %1$d s</string>
+    <string name="mostrar_tiempo">: %1$.2f s</string>
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>

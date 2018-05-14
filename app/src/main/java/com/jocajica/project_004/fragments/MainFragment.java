@@ -2,6 +2,7 @@ package com.jocajica.project_004.fragments;
 
 
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.content.res.Resources;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -36,6 +37,15 @@ public class MainFragment extends Fragment implements View.OnClickListener {
     private int mPosStart;
     private int mPosEnd;
 
+    SharedPreferences mPrefs;
+
+    int mDelayBetweenPhotos;
+    float mExpositionTime;
+    int mSpeed;
+    float mStepDistance;
+    int mStepsBetweenPhotos;
+    int mStepsRevolution;
+
     private OnMainListener mCallback;
 
     public MainFragment() {
@@ -46,6 +56,8 @@ public class MainFragment extends Fragment implements View.OnClickListener {
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
+
+        mPrefs = context.getSharedPreferences("MACROBTPREFS", Context.MODE_PRIVATE);
 
         try {
             mCallback = (OnMainListener) context;
@@ -69,9 +81,19 @@ public class MainFragment extends Fragment implements View.OnClickListener {
         View v = inflater.inflate(R.layout.fragment_main, container, false);
 
         initUI(v);
+        loadSavedPreferences();
         updateInfo();
 
         return v;
+    }
+
+    private void loadSavedPreferences() {
+        mDelayBetweenPhotos = mPrefs.getInt("DELAYBETWEENPHOTOS", 1);
+        mExpositionTime = mPrefs.getFloat("EXPOSITIONTIME", (float) 1.6);
+        mSpeed = mPrefs.getInt("SPEED", 10);
+        mStepDistance = mPrefs.getFloat("STEPDISTANCE", (float) 0.4);
+        mStepsBetweenPhotos = mPrefs.getInt("STEPSBETWEENPHOTOS", 1);
+        mStepsRevolution = mPrefs.getInt("STEPSREVOLUTION", 200);
     }
 
     private void initUI(View v) {
@@ -196,9 +218,9 @@ public class MainFragment extends Fragment implements View.OnClickListener {
     private void updateInfo() {
         Resources res = getResources();
 
-        String strDistance = String.format(res.getString(R.string.mostrar_distancia), (mPosEnd - mPosStart) * 0.4);
+        String strDistance = String.format(res.getString(R.string.mostrar_distancia), (mPosEnd - mPosStart) * mStepDistance);
         String strSteps = String.format(res.getString(R.string.mostrar_pasos), mPosEnd - mPosStart);
-        String strTime = String.format(res.getString(R.string.mostrar_tiempo), (mPosEnd - mPosStart) * 2);
+        String strTime = String.format(res.getString(R.string.mostrar_tiempo), (mPosEnd - mPosStart) * (mDelayBetweenPhotos + mExpositionTime) / mStepsBetweenPhotos);
 
         mTextViewDistance.setText(strDistance);
         mTextViewSteps.setText(strSteps);
