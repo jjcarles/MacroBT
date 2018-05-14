@@ -16,7 +16,7 @@ import com.jocajica.project_004.fragments.SettingsFragment;
 
 import java.util.Set;
 
-public class MainActivity extends AppCompatActivity implements MainFragment.OnMainListener {
+public class MainActivity extends AppCompatActivity implements MainFragment.OnMainListener, SettingsFragment.OnSettingsListener {
 
     private int mPosStart;
     private int mPosEnd;
@@ -81,7 +81,7 @@ public class MainActivity extends AppCompatActivity implements MainFragment.OnMa
     private void startEndSession() {
         mIsRunning = !mIsRunning;
 
-        ((MainFragment)mCurrentFragment).setStartEndStatus(mIsRunning);
+        ((MainFragment) mCurrentFragment).setStartEndStatus(mIsRunning);
 
         if (mIsRunning) {
             sendDataToBt("START;");
@@ -119,7 +119,7 @@ public class MainActivity extends AppCompatActivity implements MainFragment.OnMa
             mPosEnd++;
         }
 
-        ((MainFragment)mCurrentFragment).setInterval(mPosStart, mPosEnd);
+        ((MainFragment) mCurrentFragment).setInterval(mPosStart, mPosEnd);
     }
 
     private void moveBackward() {
@@ -132,7 +132,7 @@ public class MainActivity extends AppCompatActivity implements MainFragment.OnMa
             }
         }
 
-        ((MainFragment)mCurrentFragment).setInterval(mPosStart, mPosEnd);
+        ((MainFragment) mCurrentFragment).setInterval(mPosStart, mPosEnd);
     }
 
     private void moveStepForward() {
@@ -146,7 +146,7 @@ public class MainActivity extends AppCompatActivity implements MainFragment.OnMa
             mPosEnd++;
         }
 
-        ((MainFragment)mCurrentFragment).setInterval(mPosStart, mPosEnd);
+        ((MainFragment) mCurrentFragment).setInterval(mPosStart, mPosEnd);
     }
 
     private void moveStepBackward() {
@@ -160,7 +160,7 @@ public class MainActivity extends AppCompatActivity implements MainFragment.OnMa
             }
         }
 
-        ((MainFragment)mCurrentFragment).setInterval(mPosStart, mPosEnd);
+        ((MainFragment) mCurrentFragment).setInterval(mPosStart, mPosEnd);
     }
 
     @Override
@@ -201,5 +201,17 @@ public class MainActivity extends AppCompatActivity implements MainFragment.OnMa
     @Override
     public void OnTakePhoto() {
         takePhoto();
+    }
+
+    @Override
+    public void OnAccept() {
+        mCurrentFragment = new MainFragment();
+        changeFragment(mCurrentFragment);
+    }
+
+    @Override
+    public void OnCancel() {
+        mCurrentFragment = new MainFragment();
+        changeFragment(mCurrentFragment);
     }
 }

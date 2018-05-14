@@ -19,4 +19,13 @@
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="aceptar">Aceptar</string>
+    <string name="cancelar">Cancelar</string>
+    <string name="configuracion_del_rail">Configuración del rail</string>
+    <string name="configuracion_de_la_sesion">Configuración de la sesión</string>
+    <string name="pasos_por_revolucion">Pasos por revolución</string>
+    <string name="distancia_por_paso">Distancia por paso</string>
+    <string name="velocidad">Velocidad</string>
+    <string name="segundos_entre_fotos">Segundos entre fotos</string>
+    <string name="tiempo_de_exposicion">Tiempo de exposición</string>
 </resources>
