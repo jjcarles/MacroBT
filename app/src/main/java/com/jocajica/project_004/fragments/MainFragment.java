@@ -184,7 +184,6 @@ public class MainFragment extends Fragment implements View.OnClickListener {
 
     private void enableUI(boolean b) {
         mButtonBackward.setEnabled(b);
-        ;
         mButtonForward.setEnabled(b);
         mButtonSettings.setEnabled(b);
         mButtonStartEndPosition.setEnabled(b);
@@ -223,9 +222,12 @@ public class MainFragment extends Fragment implements View.OnClickListener {
         int stepsBetweenPhotos = mPrefs.getStepsBetweenPhotos();
         int stepsRevolution = mPrefs.getStepsRevolution();
 
+        float timeMove = (mPosEnd - mPosStart) * (60 / (speed * stepsRevolution));
+        float timePhotos = (mPosEnd - mPosStart) * (delayBetweenPhotos + expositionTime) / stepsBetweenPhotos;
+
         String strDistance = String.format(res.getString(R.string.mostrar_distancia), (mPosEnd - mPosStart) * stepDistance);
         String strSteps = String.format(res.getString(R.string.mostrar_pasos), mPosEnd - mPosStart);
-        String strTime = String.format(res.getString(R.string.mostrar_tiempo), (mPosEnd - mPosStart) * (delayBetweenPhotos + expositionTime) / stepsBetweenPhotos);
+        String strTime = String.format(res.getString(R.string.mostrar_tiempo), timeMove + timePhotos);
 
         mTextViewDistance.setText(strDistance);
         mTextViewSteps.setText(strSteps);
