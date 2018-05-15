@@ -2,18 +2,16 @@ package com.jocajica.project_004.fragments;
 
 
 import android.content.Context;
-import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.NumberPicker;
 
 import com.jocajica.project_004.R;
+import com.jocajica.project_004.tools.Preferences;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -30,7 +28,7 @@ public class SettingsFragment extends Fragment implements View.OnClickListener {
     private EditText mEditTextExpositionTime;
     private EditText mEditTextStepsBetweenPhotos;
 
-    SharedPreferences mPrefs;
+    Preferences mPrefs;
 
     private OnSettingsListener mCallback;
 
@@ -41,7 +39,8 @@ public class SettingsFragment extends Fragment implements View.OnClickListener {
     public void onAttach(Context context) {
         super.onAttach(context);
 
-        mPrefs = context.getSharedPreferences("MACROBTPREFS", Context.MODE_PRIVATE);
+        mPrefs = new Preferences(context);
+        mPrefs.loadPreferences();
 
         try {
             mCallback = (OnSettingsListener) context;
@@ -65,18 +64,18 @@ public class SettingsFragment extends Fragment implements View.OnClickListener {
         View v = inflater.inflate(R.layout.fragment_settings, container, false);
 
         initUI(v);
-        loadSavedPreferences();
+        assignDefaultValues();
 
         return v;
     }
 
-    private void loadSavedPreferences() {
-        String strDelayBetweenPhotos = mPrefs.getInt("DELAYBETWEENPHOTOS", 1) + "";
-        String strExpositionTime = mPrefs.getFloat("EXPOSITIONTIME", (float) 1.6) + "";
-        String strSpeed = mPrefs.getInt("SPEED", 10) + "";
-        String strStepDistance = mPrefs.getFloat("STEPDISTANCE", (float) 0.4) + "";
-        String strStepsBetweenPhotos = mPrefs.getInt("STEPSBETWEENPHOTOS", 1) + "";
-        String strStepsRevolution = mPrefs.getInt("STEPSREVOLUTION", 200) + "";
+    private void assignDefaultValues() {
+        String strDelayBetweenPhotos = mPrefs.getDelayBetweenPhotos() + "";
+        String strExpositionTime = mPrefs.getExpositionTime() + "";
+        String strSpeed = mPrefs.getSpeed() + "";
+        String strStepDistance = mPrefs.getStepDistance() + "";
+        String strStepsBetweenPhotos = mPrefs.getStepsBetweenPhotos() + "";
+        String strStepsRevolution = mPrefs.getStepsRevolution() + "";
 
         mEditTextDelayBetweenPhotos.setText(strDelayBetweenPhotos);
         mEditTextExpositionTime.setText(strExpositionTime);
@@ -87,21 +86,13 @@ public class SettingsFragment extends Fragment implements View.OnClickListener {
     }
 
     private void saveCurrentValues() {
-        int nDelayBetweenPhotos = Integer.valueOf(mEditTextDelayBetweenPhotos.getText().toString());
-        float nExpositionTime = Float.valueOf(mEditTextExpositionTime.getText().toString());
-        int nSpeed = Integer.valueOf(mEditTextSpeed.getText().toString());
-        float nStepDistance = Float.valueOf(mEditTextStepDistance.getText().toString());
-        int nStepsBetweenPhotos = Integer.valueOf(mEditTextStepsBetweenPhotos.getText().toString());
-        int nStepsRevolution = Integer.valueOf(mEditTextStepsRevolution.getText().toString());
-
-        SharedPreferences.Editor editorPrefs = mPrefs.edit();
-        editorPrefs.putInt("DELAYBETWEENPHOTOS", nDelayBetweenPhotos);
-        editorPrefs.putFloat("EXPOSITIONTIME", nExpositionTime);
-        editorPrefs.putInt("SPEED", nSpeed);
-        editorPrefs.putFloat("STEPDISTANCE", nStepDistance);
-        editorPrefs.putInt("STEPSBETWEENPHOTOS", nStepsBetweenPhotos);
-        editorPrefs.putInt("STEPSREVOLUTION", nStepsRevolution);
-        editorPrefs.commit();
+        mPrefs.setDelayBetweenPhotos(Integer.valueOf(mEditTextDelayBetweenPhotos.getText().toString()));
+        mPrefs.setExpositionTime(Float.valueOf(mEditTextExpositionTime.getText().toString()));
+        mPrefs.setSpeed(Integer.valueOf(mEditTextSpeed.getText().toString()));
+        mPrefs.setStepDistance(Float.valueOf(mEditTextStepDistance.getText().toString()));
+        mPrefs.setStepsBetweenPhotos(Integer.valueOf(mEditTextStepsBetweenPhotos.getText().toString()));
+        mPrefs.setStepsRevolution(Integer.valueOf(mEditTextStepsRevolution.getText().toString()));
+        mPrefs.savePreferences();
     }
 
     private void initUI(View v) {
@@ -117,16 +108,6 @@ public class SettingsFragment extends Fragment implements View.OnClickListener {
 
         mButtonAccept.setOnClickListener(this);
         mButtonCancel.setOnClickListener(this);
-
-        mEditTextStepsRevolution.setOnKeyListener(new View.OnKeyListener() {
-            @Override
-            public boolean onKey(View view, int i, KeyEvent keyEvent) {
-                if (keyEvent.getAction() == KeyEvent.ACTION_UP) {
-                    String strValue = ((EditText) view).getText().toString();
-                }
-                return false;
-            }
-        });
     }
 
     @Override
@@ -138,7 +119,6 @@ public class SettingsFragment extends Fragment implements View.OnClickListener {
             case R.id.buttonCancel:
                 cancelSettings();
                 break;
-
         }
     }
 
@@ -153,7 +133,6 @@ public class SettingsFragment extends Fragment implements View.OnClickListener {
 
     public interface OnSettingsListener {
         void OnAccept();
-
         void OnCancel();
     }
 }

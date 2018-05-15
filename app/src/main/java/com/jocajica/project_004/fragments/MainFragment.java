@@ -2,7 +2,6 @@ package com.jocajica.project_004.fragments;
 
 
 import android.content.Context;
-import android.content.SharedPreferences;
 import android.content.res.Resources;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -14,6 +13,7 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import com.jocajica.project_004.R;
+import com.jocajica.project_004.tools.Preferences;
 
 
 /**
@@ -37,14 +37,7 @@ public class MainFragment extends Fragment implements View.OnClickListener {
     private int mPosStart;
     private int mPosEnd;
 
-    SharedPreferences mPrefs;
-
-    int mDelayBetweenPhotos;
-    float mExpositionTime;
-    int mSpeed;
-    float mStepDistance;
-    int mStepsBetweenPhotos;
-    int mStepsRevolution;
+    Preferences mPrefs;
 
     private OnMainListener mCallback;
 
@@ -57,7 +50,8 @@ public class MainFragment extends Fragment implements View.OnClickListener {
     public void onAttach(Context context) {
         super.onAttach(context);
 
-        mPrefs = context.getSharedPreferences("MACROBTPREFS", Context.MODE_PRIVATE);
+        mPrefs = new Preferences(context);
+        mPrefs.loadPreferences();
 
         try {
             mCallback = (OnMainListener) context;
@@ -81,19 +75,9 @@ public class MainFragment extends Fragment implements View.OnClickListener {
         View v = inflater.inflate(R.layout.fragment_main, container, false);
 
         initUI(v);
-        loadSavedPreferences();
         updateInfo();
 
         return v;
-    }
-
-    private void loadSavedPreferences() {
-        mDelayBetweenPhotos = mPrefs.getInt("DELAYBETWEENPHOTOS", 1);
-        mExpositionTime = mPrefs.getFloat("EXPOSITIONTIME", (float) 1.6);
-        mSpeed = mPrefs.getInt("SPEED", 10);
-        mStepDistance = mPrefs.getFloat("STEPDISTANCE", (float) 0.4);
-        mStepsBetweenPhotos = mPrefs.getInt("STEPSBETWEENPHOTOS", 1);
-        mStepsRevolution = mPrefs.getInt("STEPSREVOLUTION", 200);
     }
 
     private void initUI(View v) {
@@ -189,11 +173,25 @@ public class MainFragment extends Fragment implements View.OnClickListener {
     }
 
     public void setStartEndStatus(boolean status) {
+        enableUI(!status);
+
         if (status) {
             mButtonRunStop.setText(R.string.parar);
         } else {
             mButtonRunStop.setText(R.string.ejecutar);
         }
+    }
+
+    private void enableUI(boolean b) {
+        mButtonBackward.setEnabled(b);
+        ;
+        mButtonForward.setEnabled(b);
+        mButtonSettings.setEnabled(b);
+        mButtonStartEndPosition.setEnabled(b);
+        mButtonStepBackward.setEnabled(b);
+        mButtonStepForward.setEnabled(b);
+        mButtonTakePhoto.setEnabled(b);
+        mButtonSettings.setEnabled(b);
     }
 
     public void setRunStopStatus(boolean status) {
@@ -218,9 +216,16 @@ public class MainFragment extends Fragment implements View.OnClickListener {
     private void updateInfo() {
         Resources res = getResources();
 
-        String strDistance = String.format(res.getString(R.string.mostrar_distancia), (mPosEnd - mPosStart) * mStepDistance);
+        int delayBetweenPhotos = mPrefs.getDelayBetweenPhotos();
+        float expositionTime = mPrefs.getExpositionTime();
+        int speed = mPrefs.getSpeed();
+        float stepDistance = mPrefs.getStepDistance();
+        int stepsBetweenPhotos = mPrefs.getStepsBetweenPhotos();
+        int stepsRevolution = mPrefs.getStepsRevolution();
+
+        String strDistance = String.format(res.getString(R.string.mostrar_distancia), (mPosEnd - mPosStart) * stepDistance);
         String strSteps = String.format(res.getString(R.string.mostrar_pasos), mPosEnd - mPosStart);
-        String strTime = String.format(res.getString(R.string.mostrar_tiempo), (mPosEnd - mPosStart) * (mDelayBetweenPhotos + mExpositionTime) / mStepsBetweenPhotos);
+        String strTime = String.format(res.getString(R.string.mostrar_tiempo), (mPosEnd - mPosStart) * (delayBetweenPhotos + expositionTime) / stepsBetweenPhotos);
 
         mTextViewDistance.setText(strDistance);
         mTextViewSteps.setText(strSteps);
