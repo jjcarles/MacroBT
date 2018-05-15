@@ -29,4 +29,7 @@
     <string name="segundos_entre_fotos">Segundos entre fotos</string>
     <string name="tiempo_de_exposicion">Tiempo de exposición</string>
     <string name="conectar">Conectar</string>
+    <string name="bluetooth">Bluetooth</string>
+    <string name="nombre">Nombre</string>
+    <string name="nombre_del_dispositivo">Nombre del dispositivo</string>
 </resources>

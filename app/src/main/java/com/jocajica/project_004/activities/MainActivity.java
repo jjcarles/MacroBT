@@ -43,6 +43,7 @@ public class MainActivity extends AppCompatActivity implements MainFragment.OnMa
         initToolbar();
         init();
 
+        mIsConnected = false;
         //initBT();
 
         mCurrentFragment = new MainFragment();
@@ -98,7 +99,6 @@ public class MainActivity extends AppCompatActivity implements MainFragment.OnMa
         mPosEnd = 0;
         mIsStartActive = true;
         mIsRunning = false;
-        mIsConnected = false;
     }
 
     private void takePhoto() {
@@ -129,7 +129,7 @@ public class MainActivity extends AppCompatActivity implements MainFragment.OnMa
     private void setPosition() {
         mIsStartActive = !mIsStartActive;
 
-        ((MainFragment) mCurrentFragment).setRunStopStatus(mIsStartActive);
+        ((MainFragment) mCurrentFragment).setPositionStatus(mIsStartActive);
 
         if (mIsStartActive) {
 

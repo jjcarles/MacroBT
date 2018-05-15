@@ -21,6 +21,7 @@ public class SettingsFragment extends Fragment implements View.OnClickListener {
     private Button mButtonAccept;
     private Button mButtonCancel;
 
+    private EditText mEditTextDeviceName;
     private EditText mEditTextStepsRevolution;
     private EditText mEditTextStepDistance;
     private EditText mEditTextSpeed;
@@ -70,6 +71,7 @@ public class SettingsFragment extends Fragment implements View.OnClickListener {
     }
 
     private void assignDefaultValues() {
+        String strDeviceName = mPrefs.getDeviceName();
         String strDelayBetweenPhotos = mPrefs.getDelayBetweenPhotos() + "";
         String strExpositionTime = mPrefs.getExpositionTime() + "";
         String strSpeed = mPrefs.getSpeed() + "";
@@ -77,6 +79,7 @@ public class SettingsFragment extends Fragment implements View.OnClickListener {
         String strStepsBetweenPhotos = mPrefs.getStepsBetweenPhotos() + "";
         String strStepsRevolution = mPrefs.getStepsRevolution() + "";
 
+        mEditTextDeviceName.setText(strDeviceName);
         mEditTextDelayBetweenPhotos.setText(strDelayBetweenPhotos);
         mEditTextExpositionTime.setText(strExpositionTime);
         mEditTextSpeed.setText(strSpeed);
@@ -86,6 +89,7 @@ public class SettingsFragment extends Fragment implements View.OnClickListener {
     }
 
     private void saveCurrentValues() {
+        mPrefs.setDeviceName(mEditTextDeviceName.getText().toString());
         mPrefs.setDelayBetweenPhotos(Integer.valueOf(mEditTextDelayBetweenPhotos.getText().toString()));
         mPrefs.setExpositionTime(Float.valueOf(mEditTextExpositionTime.getText().toString()));
         mPrefs.setSpeed(Integer.valueOf(mEditTextSpeed.getText().toString()));
@@ -99,6 +103,7 @@ public class SettingsFragment extends Fragment implements View.OnClickListener {
         mButtonAccept = v.findViewById(R.id.buttonAccept);
         mButtonCancel = v.findViewById(R.id.buttonCancel);
 
+        mEditTextDeviceName = v.findViewById(R.id.editTextDeviceName);
         mEditTextDelayBetweenPhotos = v.findViewById(R.id.editTextDelayBetweenPhotos);
         mEditTextExpositionTime = v.findViewById(R.id.editTextExpositionTime);
         mEditTextSpeed = v.findViewById(R.id.editTextSpeed);

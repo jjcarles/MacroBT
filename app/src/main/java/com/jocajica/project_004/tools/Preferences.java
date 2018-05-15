@@ -7,6 +7,7 @@ public class Preferences {
 
     private static final String PREFERENCESID = "MACROBTPREFS";
 
+    private static final String DEVICENAME = "DEVICENAME";
     private static final String DELAYBETWEENPHOTOS = "DELAYBETWEENPHOTOS";
     private static final String EXPOSITIONTIME = "EXPOSITIONTIME";
     private static final String SPEED = "SPEED";
@@ -14,20 +15,22 @@ public class Preferences {
     private static final String STEPSBETWEENPHOTOS = "STEPSBETWEENPHOTOS";
     private static final String STEPSREVOLUTION = "STEPSREVOLUTION";
 
-    SharedPreferences mPrefs;
+    private SharedPreferences mPrefs;
 
-    int mDelayBetweenPhotos;
-    float mExpositionTime;
-    int mSpeed;
-    float mStepDistance;
-    int mStepsBetweenPhotos;
-    int mStepsRevolution;
+    private String mDeviceName;
+    private int mDelayBetweenPhotos;
+    private float mExpositionTime;
+    private int mSpeed;
+    private float mStepDistance;
+    private int mStepsBetweenPhotos;
+    private int mStepsRevolution;
 
     public Preferences(Context context) {
         mPrefs = context.getSharedPreferences(PREFERENCESID, Context.MODE_PRIVATE);
     }
 
     public void loadPreferences() {
+        mDeviceName = mPrefs.getString(DEVICENAME, "MACROBT");
         mDelayBetweenPhotos = mPrefs.getInt(DELAYBETWEENPHOTOS, 1);
         mExpositionTime = mPrefs.getFloat(EXPOSITIONTIME, (float) 1.6);
         mSpeed = mPrefs.getInt(SPEED, 10);
@@ -38,6 +41,7 @@ public class Preferences {
 
     public void savePreferences() {
         SharedPreferences.Editor editorPrefs = mPrefs.edit();
+        editorPrefs.putString(DEVICENAME, mDeviceName);
         editorPrefs.putInt(DELAYBETWEENPHOTOS, mDelayBetweenPhotos);
         editorPrefs.putFloat(EXPOSITIONTIME, mExpositionTime);
         editorPrefs.putInt(SPEED, mSpeed);
@@ -45,6 +49,14 @@ public class Preferences {
         editorPrefs.putInt(STEPSBETWEENPHOTOS, mStepsBetweenPhotos);
         editorPrefs.putInt(STEPSREVOLUTION, mStepsRevolution);
         editorPrefs.commit();
+    }
+
+    public String getDeviceName() {
+        return mDeviceName;
+    }
+
+    public void setDeviceName(String mDeviceName) {
+        this.mDeviceName = mDeviceName;
     }
 
     public int getDelayBetweenPhotos() {

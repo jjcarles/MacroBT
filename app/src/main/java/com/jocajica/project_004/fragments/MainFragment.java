@@ -214,7 +214,7 @@ public class MainFragment extends Fragment implements View.OnClickListener, View
         mButtonSettings.setEnabled(b);
     }
 
-    public void setRunStopStatus(boolean status) {
+    public void setPositionStatus(boolean status) {
         if (status) {
             mButtonStartEndPosition.setText(R.string.posicion_inicial);
         } else {
