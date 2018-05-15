@@ -8,4 +8,15 @@
         <item name="colorAccent">@color/colorAccent</item>
     </style>
 
+    <style name="TextViewLabelGroup">
+        <item name="android:textSize">18sp</item>
+        <item name="android:background">@drawable/tv_background</item>
+        <item name="android:textStyle">bold|italic</item>
+        <item name="android:padding">2dp</item>
+    </style>
+
+    <style name="SplashTheme" parent="Theme.AppCompat.NoActionBar">
+        <item name="android:windowBackground">@drawable/splash_background</item>
+    </style>
+
 </resources>

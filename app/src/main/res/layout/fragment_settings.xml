@@ -2,7 +2,8 @@
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_gravity="center"
     tools:context=".fragments.SettingsFragment">
 
     <RelativeLayout
@@ -12,16 +13,16 @@
 
         <LinearLayout
             android:id="@+id/linearLayoutSlider"
-            android:layout_alignParentTop="true"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
             android:orientation="vertical">
 
             <TextView
+                style="@style/TextViewLabelGroup"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="@string/configuracion_del_rail"
-                android:textStyle="bold|italic" />
+                android:text="@string/configuracion_del_rail" />
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -40,8 +41,10 @@
                     android:id="@+id/editTextStepsRevolution"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:ems="3"
                     android:inputType="number"
-                    android:labelFor="@id/textViewLabelStepsRevolution" />
+                    android:labelFor="@id/textViewLabelStepsRevolution"
+                    android:maxLength="3" />
 
             </LinearLayout>
 
@@ -62,8 +65,10 @@
                     android:id="@+id/editTextStepDistance"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:ems="4"
                     android:inputType="numberDecimal"
-                    android:labelFor="@id/textViewLabelStepDistance" />
+                    android:labelFor="@id/textViewLabelStepDistance"
+                    android:maxLength="4" />
 
             </LinearLayout>
 
@@ -84,8 +89,10 @@
                     android:id="@+id/editTextSpeed"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:ems="3"
                     android:inputType="number"
-                    android:labelFor="@id/textViewLabelSpeed" />
+                    android:labelFor="@id/textViewLabelSpeed"
+                    android:maxLength="3" />
 
             </LinearLayout>
 
@@ -93,17 +100,18 @@
 
         <LinearLayout
             android:id="@+id/linearLayoutSession"
-            android:layout_below="@id/linearLayoutSlider"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_below="@id/linearLayoutSlider"
             android:layout_marginTop="16dp"
             android:orientation="vertical">
 
             <TextView
+                style="@style/TextViewLabelGroup"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="@string/configuracion_de_la_sesion"
-                android:textStyle="bold|italic" />
+                android:background="@drawable/tv_background"
+                android:text="@string/configuracion_de_la_sesion" />
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -122,8 +130,10 @@
                     android:id="@+id/editTextDelayBetweenPhotos"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:ems="1"
                     android:inputType="number"
-                    android:labelFor="@id/textViewLabelDelayBetweenPhotos" />
+                    android:labelFor="@id/textViewLabelDelayBetweenPhotos"
+                    android:maxLength="1" />
 
             </LinearLayout>
 
@@ -144,8 +154,10 @@
                     android:id="@+id/editTextExpositionTime"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:ems="4"
                     android:inputType="numberDecimal"
-                    android:labelFor="@id/textViewLabelExpositionTime" />
+                    android:labelFor="@id/textViewLabelExpositionTime"
+                    android:maxLength="4" />
 
             </LinearLayout>
 
@@ -166,18 +178,20 @@
                     android:id="@+id/editTextStepsBetweenPhotos"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:ems="2"
                     android:inputType="number"
-                    android:labelFor="@id/textViewLabelStepsBetweenPhotos" />
+                    android:labelFor="@id/textViewLabelStepsBetweenPhotos"
+                    android:maxLength="2" />
 
             </LinearLayout>
 
         </LinearLayout>
 
         <LinearLayout
-            android:layout_alignParentBottom="true"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="8dp"
+            android:layout_below="@id/linearLayoutSession"
+            android:layout_marginTop="24dp"
             android:orientation="horizontal">
 
             <Button
