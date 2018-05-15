@@ -5,6 +5,7 @@ import android.bluetooth.BluetoothDevice;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -27,6 +28,8 @@ public class MainActivity extends AppCompatActivity implements MainFragment.OnMa
     private boolean mIsStartActive;
     private boolean mIsRunning;
 
+    private Menu mToolbarMenu;
+
     private BluetoothAdapter mBluetoothAdapter;
     private Set<BluetoothDevice> mPairedDevices;
 
@@ -48,6 +51,7 @@ public class MainActivity extends AppCompatActivity implements MainFragment.OnMa
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
+        mToolbarMenu = menu;
         getMenuInflater().inflate(R.menu.toolbar_menu, menu);
         return true;
     }
@@ -58,6 +62,7 @@ public class MainActivity extends AppCompatActivity implements MainFragment.OnMa
 
         if (id == R.id.connectBluetooth) {
             mIsConnected = true;
+            item.setIcon(ContextCompat.getDrawable(this, R.mipmap.ic_launcher));
             return true;
         }
 
