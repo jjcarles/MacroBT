@@ -62,7 +62,7 @@ public class MainActivity extends AppCompatActivity implements MainFragment.OnMa
 
         if (id == R.id.connectBluetooth) {
             mIsConnected = true;
-            item.setIcon(ContextCompat.getDrawable(this, R.mipmap.ic_launcher));
+            item.setIcon(ContextCompat.getDrawable(this, R.drawable.ic_bluetooth_on));
             return true;
         }
 
