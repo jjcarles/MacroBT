@@ -28,4 +28,5 @@
     <string name="velocidad">Velocidad</string>
     <string name="segundos_entre_fotos">Segundos entre fotos</string>
     <string name="tiempo_de_exposicion">Tiempo de exposición</string>
+    <string name="conectar">Conectar</string>
 </resources>

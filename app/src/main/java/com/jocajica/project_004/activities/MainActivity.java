@@ -8,6 +8,8 @@ import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.widget.Toast;
 
 import com.jocajica.project_004.R;
@@ -21,6 +23,7 @@ public class MainActivity extends AppCompatActivity implements MainFragment.OnMa
     private int mPosStart;
     private int mPosEnd;
 
+    private boolean mIsConnected;
     private boolean mIsStartActive;
     private boolean mIsRunning;
 
@@ -41,6 +44,24 @@ public class MainActivity extends AppCompatActivity implements MainFragment.OnMa
 
         mCurrentFragment = new MainFragment();
         changeFragment(mCurrentFragment);
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.toolbar_menu, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        int id = item.getItemId();
+
+        if (id == R.id.connectBluetooth) {
+            mIsConnected = true;
+            return true;
+        }
+
+        return super.onOptionsItemSelected(item);
     }
 
     private void changeFragment(Fragment fragment) {
@@ -72,6 +93,7 @@ public class MainActivity extends AppCompatActivity implements MainFragment.OnMa
         mPosEnd = 0;
         mIsStartActive = true;
         mIsRunning = false;
+        mIsConnected = false;
     }
 
     private void takePhoto() {
@@ -112,6 +134,9 @@ public class MainActivity extends AppCompatActivity implements MainFragment.OnMa
     }
 
     private void moveForward() {
+        if (!mIsConnected)
+            return;
+
         if (mIsStartActive) {
             mPosStart++;
 
@@ -126,6 +151,9 @@ public class MainActivity extends AppCompatActivity implements MainFragment.OnMa
     }
 
     private void moveBackward() {
+        if (!mIsConnected)
+            return;
+
         if (mIsStartActive) {
             mPosStart--;
         } else {
@@ -140,6 +168,9 @@ public class MainActivity extends AppCompatActivity implements MainFragment.OnMa
     }
 
     private void moveStepForward() {
+        if (!mIsConnected)
+            return;
+
         if (mIsStartActive) {
             mPosStart++;
 
@@ -154,6 +185,9 @@ public class MainActivity extends AppCompatActivity implements MainFragment.OnMa
     }
 
     private void moveStepBackward() {
+        if (!mIsConnected)
+            return;
+
         if (mIsStartActive) {
             mPosStart--;
         } else {
