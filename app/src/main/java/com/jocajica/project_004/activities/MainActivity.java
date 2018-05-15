@@ -114,7 +114,10 @@ public class MainActivity extends AppCompatActivity implements MainFragment.OnMa
     private void moveForward() {
         if (mIsStartActive) {
             mPosStart++;
-            mPosEnd = mPosStart;
+
+            if (mPosStart > mPosEnd) {
+                mPosEnd = mPosStart;
+            }
         } else {
             mPosEnd++;
         }
@@ -125,10 +128,11 @@ public class MainActivity extends AppCompatActivity implements MainFragment.OnMa
     private void moveBackward() {
         if (mIsStartActive) {
             mPosStart--;
-            mPosEnd = mPosStart;
         } else {
-            if (mPosEnd > mPosStart) {
-                mPosEnd--;
+            mPosEnd--;
+
+            if (mPosEnd < mPosStart) {
+                mPosStart = mPosEnd;
             }
         }
 

@@ -4,9 +4,12 @@ package com.jocajica.project_004.fragments;
 import android.content.Context;
 import android.content.res.Resources;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.SystemClock;
 import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
@@ -19,7 +22,7 @@ import com.jocajica.project_004.tools.Preferences;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class MainFragment extends Fragment implements View.OnClickListener {
+public class MainFragment extends Fragment implements View.OnClickListener, View.OnTouchListener {
 
     private Button mButtonStepBackward;
     private Button mButtonStepForward;
@@ -37,9 +40,27 @@ public class MainFragment extends Fragment implements View.OnClickListener {
     private int mPosStart;
     private int mPosEnd;
 
-    Preferences mPrefs;
+    private Preferences mPrefs;
 
     private OnMainListener mCallback;
+
+    private Handler mHandler = new Handler();
+
+    private Runnable mButtonForwardHoldTask = new Runnable() {
+        @Override
+        public void run() {
+            mCallback.OnMoveForward();
+            mHandler.postAtTime(this, SystemClock.uptimeMillis() + 100);
+        }
+    };
+
+    private Runnable mButtonBackwardHoldTask = new Runnable() {
+        @Override
+        public void run() {
+            mCallback.OnMoveBackward();
+            mHandler.postAtTime(this, SystemClock.uptimeMillis() + 100);
+        }
+    };
 
     public MainFragment() {
         mPosStart = 0;
@@ -92,8 +113,8 @@ public class MainFragment extends Fragment implements View.OnClickListener {
 
         mButtonStepBackward.setOnClickListener(this);
         mButtonStepForward.setOnClickListener(this);
-        mButtonBackward.setOnClickListener(this);
-        mButtonForward.setOnClickListener(this);
+        mButtonBackward.setOnTouchListener(this);
+        mButtonForward.setOnTouchListener(this);
         mButtonStartEndPosition.setOnClickListener(this);
         mButtonSettings.setOnClickListener(this);
         mButtonRunStop.setOnClickListener(this);
@@ -201,14 +222,47 @@ public class MainFragment extends Fragment implements View.OnClickListener {
         }
     }
 
+    @Override
+    public boolean onTouch(View view, MotionEvent motionEvent) {
+        int action = motionEvent.getAction();
+
+        switch (view.getId()) {
+            case R.id.buttonForward:
+                if (action == MotionEvent.ACTION_DOWN) {
+                    mHandler.removeCallbacks(mButtonForwardHoldTask);
+                    mHandler.postAtTime(mButtonForwardHoldTask, SystemClock.uptimeMillis() + 50);
+                } else if (action == MotionEvent.ACTION_UP) {
+                    mHandler.removeCallbacks(mButtonForwardHoldTask);
+                }
+                break;
+            case R.id.buttonBackward:
+                if (action == MotionEvent.ACTION_DOWN) {
+                    mHandler.removeCallbacks(mButtonBackwardHoldTask);
+                    mHandler.postAtTime(mButtonBackwardHoldTask, SystemClock.uptimeMillis() + 50);
+                } else if (action == MotionEvent.ACTION_UP) {
+                    mHandler.removeCallbacks(mButtonBackwardHoldTask);
+                }
+                break;
+        }
+
+        return false;
+    }
+
     public interface OnMainListener {
         void OnMoveStepForward();
+
         void OnMoveForward();
+
         void OnMoveStepBackward();
+
         void OnMoveBackward();
+
         void OnSetPosition();
+
         void OnConfigure();
+
         void OnStartEndSession();
+
         void OnTakePhoto();
     }
 
