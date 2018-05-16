@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">MACROBT</string>
+    <string name="app_name">MacroBT</string>
     <string name="retroceso_fino">Retroceso Fino</string>
     <string name="avance_fino">Avance Fino</string>
     <string name="retroceso">Retroceso</string>
