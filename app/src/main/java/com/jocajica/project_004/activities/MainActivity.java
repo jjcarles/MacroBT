@@ -16,6 +16,7 @@ import android.widget.Toast;
 import com.jocajica.project_004.R;
 import com.jocajica.project_004.fragments.MainFragment;
 import com.jocajica.project_004.fragments.SettingsFragment;
+import com.jocajica.project_004.tools.Preferences;
 
 import java.util.Set;
 
@@ -25,13 +26,13 @@ public class MainActivity extends AppCompatActivity implements MainFragment.OnMa
     private int mPosEnd;
 
     private boolean mIsConnected;
-    private boolean mIsStartActive;
+    private boolean mIsStartPositionActive;
     private boolean mIsRunning;
 
     private Menu mToolbarMenu;
 
     private BluetoothAdapter mBluetoothAdapter;
-    private Set<BluetoothDevice> mPairedDevices;
+    private String mDeviceHardwareAddress;
 
     private Fragment mCurrentFragment;
 
@@ -42,9 +43,7 @@ public class MainActivity extends AppCompatActivity implements MainFragment.OnMa
 
         initToolbar();
         init();
-
-        mIsConnected = false;
-        //initBT();
+        initBT();
 
         mCurrentFragment = new MainFragment();
         changeFragment(mCurrentFragment);
@@ -62,12 +61,31 @@ public class MainActivity extends AppCompatActivity implements MainFragment.OnMa
         int id = item.getItemId();
 
         if (id == R.id.connectBluetooth) {
-            mIsConnected = true;
-            item.setIcon(ContextCompat.getDrawable(this, R.drawable.ic_bluetooth_on));
+            if (!mIsConnected) {
+                connectToDevice();
+                showBluetoothStatus(mIsConnected);
+            } else {
+                disconnectDevice();
+                showBluetoothStatus(mIsConnected);
+            }
+
             return true;
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    private void disconnectDevice() {
+        mBluetoothAdapter.disable();
+        mIsConnected = false;
+    }
+
+    public void showBluetoothStatus(boolean status) {
+        if (status) {
+            mToolbarMenu.getItem(0).setIcon(ContextCompat.getDrawable(this, R.drawable.ic_bluetooth_on));
+        } else {
+            mToolbarMenu.getItem(0).setIcon(ContextCompat.getDrawable(this, R.drawable.ic_bluetooth_off));
+        }
     }
 
     private void changeFragment(Fragment fragment) {
@@ -88,16 +106,50 @@ public class MainActivity extends AppCompatActivity implements MainFragment.OnMa
     }
 
     private void initBT() {
-        mBluetoothAdapter = BluetoothAdapter.getDefaultAdapter();
+        mIsConnected = false;
+
+        if (!bluetoothAvailable()) {
+            Toast.makeText(this, "Dispositivo no compatible", Toast.LENGTH_LONG).show();
+            finish();
+        } else {
+            connectToDevice();
+        }
+    }
+
+    private boolean bluetoothAvailable() {
         if (mBluetoothAdapter == null) {
-            Toast.makeText(this, "Dispositivo no compatible", Toast.LENGTH_SHORT).show();
+            mBluetoothAdapter = BluetoothAdapter.getDefaultAdapter();
+            return mBluetoothAdapter != null;
+        }
+
+        return true;
+    }
+
+    private void connectToDevice() {
+        Preferences prefs = new Preferences(this);
+        prefs.loadPreferences();
+
+        if (bluetoothAvailable()) {
+            if (mBluetoothAdapter.isEnabled()) {
+                Set<BluetoothDevice> pairedDevices = mBluetoothAdapter.getBondedDevices();
+
+                if (pairedDevices.size() > 0) {
+                    for (BluetoothDevice device : pairedDevices) {
+                        if (device.getName() == prefs.getDeviceName()) {
+                            mDeviceHardwareAddress = device.getAddress();
+                            mIsConnected = true;
+                            break;
+                        }
+                    }
+                }
+            }
         }
     }
 
     private void init() {
         mPosStart = 0;
         mPosEnd = 0;
-        mIsStartActive = true;
+        mIsStartPositionActive = true;
         mIsRunning = false;
     }
 
@@ -127,11 +179,11 @@ public class MainActivity extends AppCompatActivity implements MainFragment.OnMa
     }
 
     private void setPosition() {
-        mIsStartActive = !mIsStartActive;
+        mIsStartPositionActive = !mIsStartPositionActive;
 
-        ((MainFragment) mCurrentFragment).setPositionStatus(mIsStartActive);
+        ((MainFragment) mCurrentFragment).setPositionStatus(mIsStartPositionActive);
 
-        if (mIsStartActive) {
+        if (mIsStartPositionActive) {
 
         } else {
 
@@ -142,7 +194,7 @@ public class MainActivity extends AppCompatActivity implements MainFragment.OnMa
         if (!mIsConnected)
             return;
 
-        if (mIsStartActive) {
+        if (mIsStartPositionActive) {
             mPosStart++;
 
             if (mPosStart > mPosEnd) {
@@ -159,7 +211,7 @@ public class MainActivity extends AppCompatActivity implements MainFragment.OnMa
         if (!mIsConnected)
             return;
 
-        if (mIsStartActive) {
+        if (mIsStartPositionActive) {
             mPosStart--;
         } else {
             mPosEnd--;
@@ -176,7 +228,7 @@ public class MainActivity extends AppCompatActivity implements MainFragment.OnMa
         if (!mIsConnected)
             return;
 
-        if (mIsStartActive) {
+        if (mIsStartPositionActive) {
             mPosStart++;
 
             if (mPosStart > mPosEnd) {
@@ -193,7 +245,7 @@ public class MainActivity extends AppCompatActivity implements MainFragment.OnMa
         if (!mIsConnected)
             return;
 
-        if (mIsStartActive) {
+        if (mIsStartPositionActive) {
             mPosStart--;
         } else {
             mPosEnd--;
