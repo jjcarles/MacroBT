@@ -43,7 +43,7 @@ public class MainActivity extends AppCompatActivity implements MainFragment.OnMa
 
         initToolbar();
         init();
-        initBT();
+        //initBT();
 
         mCurrentFragment = new MainFragment();
         changeFragment(mCurrentFragment);
