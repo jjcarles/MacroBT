@@ -12,7 +12,7 @@
         <item name="android:textSize">18sp</item>
         <item name="android:background">@drawable/tv_background</item>
         <item name="android:textStyle">bold|italic</item>
-        <item name="android:padding">2dp</item>
+        <item name="android:padding">4dp</item>
         <item name="android:textColor">@color/colorPrimaryText</item>
     </style>
 
