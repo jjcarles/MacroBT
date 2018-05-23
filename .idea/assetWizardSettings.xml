@@ -19,10 +19,10 @@
                                   <option name="values">
                                     <map>
                                       <entry key="assetType" value="IMAGE" />
-                                      <entry key="imageAsset" value="C:\Users\Joan Carles Jiménez\Downloads\bluetooth-blue.png" />
-                                      <entry key="outputName" value="ic_bluetooth_on" />
+                                      <entry key="imageAsset" value="C:\Users\jcarles\Downloads\bluetooth_off.png" />
+                                      <entry key="outputName" value="ic_bluetooth_off" />
                                       <entry key="theme" value="CUSTOM" />
-                                      <entry key="themeColor" value="0000ff" />
+                                      <entry key="themeColor" value="ff0000" />
                                     </map>
                                   </option>
                                 </PersistentState>
@@ -49,6 +49,18 @@
                                   <option name="values">
                                     <map>
                                       <entry key="foregroundImage" value="C:\Users\Joan Carles Jiménez\Downloads\bluetooth-blue.png" />
+                                    </map>
+                                  </option>
+                                </PersistentState>
+                              </value>
+                            </entry>
+                            <entry key="notification">
+                              <value>
+                                <PersistentState>
+                                  <option name="values">
+                                    <map>
+                                      <entry key="assetType" value="IMAGE" />
+                                      <entry key="imageAsset" value="C:\Users\jcarles\Downloads\bluetooth_on.png" />
                                     </map>
                                   </option>
                                 </PersistentState>
