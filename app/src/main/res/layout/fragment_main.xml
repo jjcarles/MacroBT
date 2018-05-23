@@ -9,7 +9,7 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical" >
+        android:orientation="vertical">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -24,7 +24,8 @@
                 android:layout_margin="4dp"
                 android:layout_weight="1"
                 android:background="@drawable/btn_background"
-                android:text="@string/retroceso_fino" />
+                android:text="@string/retroceso_fino"
+                android:textColor="@color/colorPrimaryText" />
 
             <Button
                 android:id="@+id/buttonStepForward"
@@ -33,7 +34,8 @@
                 android:layout_margin="4dp"
                 android:layout_weight="1"
                 android:background="@drawable/btn_background"
-                android:text="@string/avance_fino" />
+                android:text="@string/avance_fino"
+                android:textColor="@color/colorPrimaryText" />
 
         </LinearLayout>
 
@@ -50,7 +52,8 @@
                 android:layout_margin="4dp"
                 android:layout_weight="1"
                 android:background="@drawable/btn_background"
-                android:text="@string/retroceso" />
+                android:text="@string/retroceso"
+                android:textColor="@color/colorPrimaryText" />
 
             <Button
                 android:id="@+id/buttonForward"
@@ -59,7 +62,8 @@
                 android:layout_margin="4dp"
                 android:layout_weight="1"
                 android:background="@drawable/btn_background"
-                android:text="@string/avance" />
+                android:text="@string/avance"
+                android:textColor="@color/colorPrimaryText" />
 
         </LinearLayout>
 
@@ -76,7 +80,8 @@
                 android:layout_margin="4dp"
                 android:layout_weight="1"
                 android:background="@drawable/btn_background"
-                android:text="@string/posicion_inicial" />
+                android:text="@string/posicion_inicial"
+                android:textColor="@color/colorPrimaryText" />
 
             <Button
                 android:id="@+id/buttonSettings"
@@ -85,7 +90,8 @@
                 android:layout_margin="4dp"
                 android:layout_weight="1"
                 android:background="@drawable/btn_background"
-                android:text="@string/configuracion" />
+                android:text="@string/configuracion"
+                android:textColor="@color/colorPrimaryText" />
 
         </LinearLayout>
 
@@ -106,13 +112,15 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/distancia"
+                    android:textColor="@color/colorPrimaryText"
                     android:textStyle="bold" />
 
                 <TextView
                     android:id="@+id/textViewDistance"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/distancia" />
+                    android:text="@string/distancia"
+                    android:textColor="@color/colorPrimaryText" />
 
             </LinearLayout>
 
@@ -126,13 +134,15 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/pasos"
+                    android:textColor="@color/colorPrimaryText"
                     android:textStyle="bold" />
 
                 <TextView
                     android:id="@+id/textViewSteps"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/pasos" />
+                    android:text="@string/pasos"
+                    android:textColor="@color/colorPrimaryText" />
 
             </LinearLayout>
 
@@ -146,13 +156,15 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/tiempo_restante"
+                    android:textColor="@color/colorPrimaryText"
                     android:textStyle="bold" />
 
                 <TextView
                     android:id="@+id/textViewTime"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/tiempo_restante" />
+                    android:text="@string/tiempo_restante"
+                    android:textColor="@color/colorPrimaryText" />
 
             </LinearLayout>
 
@@ -170,7 +182,8 @@
                 android:layout_height="wrap_content"
                 android:layout_margin="4dp"
                 android:background="@drawable/btn_background"
-                android:text="@string/ejecutar" />
+                android:text="@string/ejecutar"
+                android:textColor="@color/colorPrimaryText" />
 
             <Button
                 android:id="@+id/buttonTakePhoto"
@@ -178,7 +191,8 @@
                 android:layout_height="wrap_content"
                 android:layout_margin="4dp"
                 android:background="@drawable/btn_background"
-                android:text="@string/hacer_foto" />
+                android:text="@string/hacer_foto"
+                android:textColor="@color/colorPrimaryText" />
 
         </LinearLayout>
 

@@ -35,6 +35,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/nombre_del_dispositivo"
+                    android:textColor="@color/colorPrimaryText"
                     android:textStyle="bold" />
 
                 <EditText
@@ -44,7 +45,8 @@
                     android:ems="15"
                     android:inputType="text"
                     android:labelFor="@id/textViewLabelDeviceName"
-                    android:maxLength="15" />
+                    android:maxLength="15"
+                    android:textColor="@color/colorPrimaryText" />
 
             </LinearLayout>
 
@@ -75,6 +77,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/pasos_por_revolucion"
+                    android:textColor="@color/colorPrimaryText"
                     android:textStyle="bold" />
 
                 <EditText
@@ -84,7 +87,8 @@
                     android:ems="3"
                     android:inputType="number"
                     android:labelFor="@id/textViewLabelStepsRevolution"
-                    android:maxLength="3" />
+                    android:maxLength="3"
+                    android:textColor="@color/colorPrimaryText" />
 
             </LinearLayout>
 
@@ -99,6 +103,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/distancia_por_paso"
+                    android:textColor="@color/colorPrimaryText"
                     android:textStyle="bold" />
 
                 <EditText
@@ -108,7 +113,8 @@
                     android:ems="4"
                     android:inputType="numberDecimal"
                     android:labelFor="@id/textViewLabelStepDistance"
-                    android:maxLength="4" />
+                    android:maxLength="4"
+                    android:textColor="@color/colorPrimaryText" />
 
             </LinearLayout>
 
@@ -123,6 +129,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/velocidad"
+                    android:textColor="@color/colorPrimaryText"
                     android:textStyle="bold" />
 
                 <EditText
@@ -132,7 +139,8 @@
                     android:ems="3"
                     android:inputType="number"
                     android:labelFor="@id/textViewLabelSpeed"
-                    android:maxLength="3" />
+                    android:maxLength="3"
+                    android:textColor="@color/colorPrimaryText" />
 
             </LinearLayout>
 
@@ -164,6 +172,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/segundos_entre_fotos"
+                    android:textColor="@color/colorPrimaryText"
                     android:textStyle="bold" />
 
                 <EditText
@@ -173,7 +182,8 @@
                     android:ems="1"
                     android:inputType="number"
                     android:labelFor="@id/textViewLabelDelayBetweenPhotos"
-                    android:maxLength="1" />
+                    android:maxLength="1"
+                    android:textColor="@color/colorPrimaryText" />
 
             </LinearLayout>
 
@@ -188,6 +198,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/tiempo_de_exposicion"
+                    android:textColor="@color/colorPrimaryText"
                     android:textStyle="bold" />
 
                 <EditText
@@ -197,7 +208,8 @@
                     android:ems="4"
                     android:inputType="numberDecimal"
                     android:labelFor="@id/textViewLabelExpositionTime"
-                    android:maxLength="4" />
+                    android:maxLength="4"
+                    android:textColor="@color/colorPrimaryText" />
 
             </LinearLayout>
 
@@ -212,6 +224,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Pasos entre fotos"
+                    android:textColor="@color/colorPrimaryText"
                     android:textStyle="bold" />
 
                 <EditText
@@ -221,7 +234,8 @@
                     android:ems="2"
                     android:inputType="number"
                     android:labelFor="@id/textViewLabelStepsBetweenPhotos"
-                    android:maxLength="2" />
+                    android:maxLength="2"
+                    android:textColor="@color/colorPrimaryText" />
 
             </LinearLayout>
 
@@ -241,7 +255,8 @@
                 android:layout_margin="4dp"
                 android:layout_weight="1"
                 android:background="@drawable/btn_background"
-                android:text="@string/aceptar" />
+                android:text="@string/aceptar"
+                android:textColor="@color/colorPrimaryText" />
 
             <Button
                 android:id="@+id/buttonCancel"
@@ -250,7 +265,8 @@
                 android:layout_margin="4dp"
                 android:layout_weight="1"
                 android:background="@drawable/btn_background"
-                android:text="@string/cancelar" />
+                android:text="@string/cancelar"
+                android:textColor="@color/colorPrimaryText" />
 
         </LinearLayout>
 
