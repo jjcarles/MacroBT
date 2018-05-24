@@ -43,7 +43,7 @@ public class MainActivity extends AppCompatActivity implements MainFragment.OnMa
 
         initToolbar();
         init();
-        //initBT();
+        initBT();
 
         mCurrentFragment = new MainFragment();
         changeFragment(mCurrentFragment);
@@ -60,12 +60,16 @@ public class MainActivity extends AppCompatActivity implements MainFragment.OnMa
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
 
+        // Only for test
+        mIsConnected = !mIsConnected;
+        // end test
+
         if (id == R.id.connectBluetooth) {
             if (!mIsConnected) {
-                connectToDevice();
+                //connectToDevice();
                 showBluetoothStatus(mIsConnected);
             } else {
-                disconnectDevice();
+                //disconnectDevice();
                 showBluetoothStatus(mIsConnected);
             }
 
@@ -108,12 +112,14 @@ public class MainActivity extends AppCompatActivity implements MainFragment.OnMa
     private void initBT() {
         mIsConnected = false;
 
+        /*
         if (!bluetoothAvailable()) {
             Toast.makeText(this, "Dispositivo no compatible", Toast.LENGTH_LONG).show();
             finish();
         } else {
             connectToDevice();
         }
+        */
     }
 
     private boolean bluetoothAvailable() {
